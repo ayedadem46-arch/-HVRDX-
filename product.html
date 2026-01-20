@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HVRDX Hoodie</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script>
+    const sizeButtons = document.querySelectorAll(".size-btn");
+    const sizeInput = document.getElementById("selected-size");
+
+    sizeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        sizeButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        sizeInput.value = btn.textContent;
+      });
+    });
+  </script>
+  <body>
+    <nav class="nav">
+      <a href="index.html" class="back-btn">← Back</a>
+      <div class="logo">HVRDX</div>
+    </nav>
+
+    <!-- PRODUCT -->
+    <section class="product-page">
+      <!-- IMAGE -->
+      <div class="product-image">
+        <img src="hoodie.png" alt="HVRDX Hoodie" />
+        <p class="product-price-top">75 DT</p>
+      </div>
+
+      <!-- FORM -->
+      <div class="product-form">
+        <h1>HVRDX BLACK HOODIE</h1>
+
+        <form class="order-form">
+          <input type="text" placeholder="Full Name" required />
+          <input type="tel" placeholder="Phone Number" required />
+
+          <select required>
+            <option value="">Governorate</option>
+            <option>Tunis</option>
+            <option>Ariana</option>
+            <option>Ben Arous</option>
+            <option>Manouba</option>
+            <option>Sfax</option>
+            <option>Sousse</option>
+            <option>Nabeul</option>
+            <option>Monastir</option>
+            <option>Kairouan</option>
+            <option>Bizerte</option>
+            <option>Gabès</option>
+            <option>Gafsa</option>
+            <option>Kasserine</option>
+            <option>Jendouba</option>
+            <option>Kef</option>
+            <option>Mahdia</option>
+            <option>Medenine</option>
+            <option>Tataouine</option>
+            <option>Tozeur</option>
+            <option>Kebili</option>
+            <option>Zaghouan</option>
+            <option>Siliana</option>
+          </select>
+
+          <input type="text" placeholder="Address (Street, City)" required />
+
+          <div class="sizes">
+            <button type="button" class="size-btn">L</button>
+            <button type="button" class="size-btn">XL</button>
+          </div>
+
+          <input type="hidden" name="size" id="selected-size" required />
+
+          <button class="btn-primary full">CONFIRM ORDER</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
