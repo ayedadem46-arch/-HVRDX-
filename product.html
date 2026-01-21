@@ -5,43 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HVRDX Hoodie</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <script>
-    const sizeButtons = document.querySelectorAll(".size-btn");
-    const sizeInput = document.getElementById("selected-size");
+    <style>
+      /* BASIC RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background: #111;
+        color: #fff;
+      }
 
-    sizeButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        sizeButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        sizeInput.value = btn.textContent;
-      });
-    });
-  </script>
+      /* NAV */
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background: #000;
+        color: #fff;
+      }
+      .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+      }
+      .back {
+        font-weight: bold;
+      }
+
+      /* PRODUCT PAGE */
+      .product-page {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: start;
+      }
+      .product-img img {
+        width: 100%;
+        max-width: 500px;
+        display: block;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      }
+      .product-details h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .product-details .price {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #e10600;
+      }
+
+      /* FORM */
+      .order-form input,
+      .order-form select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #444;
+        background: #222;
+        color: #fff;
+        border-radius: 5px;
+      }
+      .order-form select option {
+        background: #222;
+        color: #fff;
+      }
+      .sizes {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .size-btn {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #e10600;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 5px;
+      }
+      .size-btn.active {
+        background: #e10600;
+        color: #fff;
+        border-color: #e10600;
+      }
+
+      /* BUTTON */
+      .btn-primary {
+        width: 100%;
+        background: #e10600;
+        color: #fff;
+        border: none;
+        padding: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+      }
+      .btn-primary:hover {
+        background: #ff1a1a;
+      }
+
+      /* FOOTER */
+      .footer {
+        text-align: center;
+        padding: 20px;
+        color: #888;
+        margin-top: 50px;
+        border-top: 1px solid #222;
+      }
+
+      /* MOBILE */
+      @media (max-width: 900px) {
+        .product-page {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .product-img img {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
   <body>
+    <!-- NAV -->
     <nav class="nav">
-      <a href="index.html" class="back-btn">← Back</a>
-      <div class="logo">HVRDX</div>
+      <a href="index.html" class="back">← Back</a>
+      <div class="logo-text">HVRDX</div>
     </nav>
 
-    <!-- PRODUCT -->
+    <!-- PRODUCT SECTION -->
     <section class="product-page">
-      <!-- IMAGE -->
-      <div class="product-image">
+      <!-- HOODIE IMAGE -->
+      <div class="product-img">
         <img src="hoodie.png" alt="HVRDX Hoodie" />
-        <p class="product-price-top">75 DT</p>
       </div>
 
-      <!-- FORM -->
-      <div class="product-form">
+      <!-- ORDER DETAILS -->
+      <div class="product-details">
         <h1>HVRDX BLACK HOODIE</h1>
+        <p class="price">75 DT</p>
 
-        <form class="order-form">
-          <input type="text" placeholder="Full Name" required />
-          <input type="tel" placeholder="Phone Number" required />
+        <!-- ORDER FORM -->
+        <form
+          class="order-form"
+          action="https://formspree.io/f/xykkneek"
+          method="POST"
+        >
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="tel" name="phone" placeholder="Phone Number" required />
 
-          <select required>
-            <option value="">Governorate</option>
+          <select name="governorate" required>
+            <option value="">Select Governorate</option>
             <option>Tunis</option>
             <option>Ariana</option>
             <option>Ben Arous</option>
@@ -66,18 +192,41 @@
             <option>Siliana</option>
           </select>
 
-          <input type="text" placeholder="Address (Street, City)" required />
+          <input
+            type="text"
+            name="address"
+            placeholder="Street, City"
+            required
+          />
 
+          <!-- SIZE BUTTONS L and XL -->
           <div class="sizes">
             <button type="button" class="size-btn">L</button>
             <button type="button" class="size-btn">XL</button>
           </div>
 
+          <!-- HIDDEN INPUT FOR SIZE -->
           <input type="hidden" name="size" id="selected-size" required />
 
-          <button class="btn-primary full">CONFIRM ORDER</button>
+          <button class="btn-primary" type="submit">CONFIRM ORDER</button>
         </form>
       </div>
     </section>
+
+    <footer class="footer">© 2026 HVRDX — Tunisia</footer>
+
+    <!-- JS FOR L/XL BUTTONS -->
+    <script>
+      const sizeButtons = document.querySelectorAll(".size-btn");
+      const sizeInput = document.getElementById("selected-size");
+
+      sizeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          sizeButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          sizeInput.value = btn.textContent;
+        });
+      });
+    </script>
   </body>
 </html>
